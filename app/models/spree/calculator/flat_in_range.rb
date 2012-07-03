@@ -17,5 +17,16 @@ module Spree
         return 0.0
       end
     end
+
+    def available?(object)
+      sum = 0
+      item_total = object.line_items.map(&:amount).sum
+      if (item_total >= self.preferred_lower_boundry && item_total <= self.preferred_upper_boundry)
+        return true
+      else
+        return false
+      end
+    end
+
   end
 end
